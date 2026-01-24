@@ -25,7 +25,7 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          cd CI-CD/Task_2
+          cd CI-CD/task_2
           pylint app.py
 
       - name: Set up Docker Buildx
