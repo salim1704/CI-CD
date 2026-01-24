@@ -4,7 +4,7 @@ import redis
 
 app = Flask(__name__)
 redis_host = os.getenv('REDIS_HOST', 'redis')
-redis_port = int(os.getenv('REDIS_PORT', 6379))
+redis_port = int(os.getenv('REDIS_PORT', '6379'))
 
 def get_redis():
     return redis.Redis(host=redis_host, port=redis_port, db=0)
