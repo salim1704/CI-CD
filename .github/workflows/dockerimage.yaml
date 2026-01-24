@@ -39,12 +39,12 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./CI-CD/Task_1
-          file: ./CI-CD/Task_1/Dockerfile
+          context: ./Task_2
+          file: ./Task_2/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/task-1:latest
-            ${{ secrets.DOCKER_HUB_USERNAME }}/task-1:${{ github.sha }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:${{ github.sha }}
 
   # deploy:
   #   runs-on: ubuntu-latest
