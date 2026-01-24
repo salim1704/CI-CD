@@ -25,7 +25,6 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          ls
           cd task_2
           pylint app.py
 
