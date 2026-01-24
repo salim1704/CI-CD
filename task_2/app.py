@@ -14,10 +14,12 @@ def get_redis():
 
 @app.route('/')
 def hello_world():
+    """Return a simple greeting to confirm the app is running."""
     return 'Hello, World! This is a Docker Challenge App.'
 
 @app.route('/count')
 def count():
+    """Increment and return the page visit counter stored in Redis."""
     r = get_redis()
     hits = r.incr('hits')
     return f'This page has been viewed {hits} times.'
