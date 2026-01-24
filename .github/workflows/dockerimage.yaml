@@ -46,22 +46,23 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./task_2
-          file: ./task_2/Dockerfile
+          file: ./task_2/dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:latest
             ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:${{ github.sha }}
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
-  #   steps:
-  #     - name: SSH and Deploy to EC2
-  #       uses: appleboy/ssh-action@v0.1.9
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ${{ secrets.EC2_HOST_USER }}
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: |
+    steps:
+      - name: SSH and Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_HOST_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: | 
+            docker 
 

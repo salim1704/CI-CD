@@ -7,7 +7,7 @@ def client():
     app_module.app.config["TESTING"] = True
     with app_module.app.test_client() as client:
         yield client
-
+    
 
 def test_home_returns_greeting(client):
     resp = client.get("/")
