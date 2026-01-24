@@ -71,6 +71,6 @@ jobs:
               cd "$APP_DIR"
               git pull
             fi
-            docker compose pull
-            docker compose up -d
+            docker-compose pull
+            docker-compose up -d
             docker image prune -f
