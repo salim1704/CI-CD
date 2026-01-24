@@ -1,5 +1,5 @@
 # name:  First Workflow
-# on: [push]
+# on:
 
 # jobs:
 #   build:

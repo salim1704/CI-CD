@@ -25,7 +25,7 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          pylint CI-CD/Task_2/app.py
+          pylint CI-CD/task_2/app.py
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -39,8 +39,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./Task_2
-          file: ./Task_2/Dockerfile
+          context: ./task_2
+          file: ./task_2/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:latest
