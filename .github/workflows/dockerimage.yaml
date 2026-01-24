@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r task_2/requirements.txt
 
-      - name: Analysing the code with pylint
+      - name: Analyzing the code with pylint
         run: |
           cd task_2
           pylint app.py
@@ -52,16 +52,25 @@ jobs:
             ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:latest
             ${{ secrets.DOCKER_HUB_USERNAME }}/task-2:${{ github.sha }}
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
-  #   steps:
-  #     - name: SSH and Deploy to EC2
-  #       uses: appleboy/ssh-action@v0.1.9
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ${{ secrets.EC2_HOST_USER }}
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: | 
-          
+    steps:
+      - name: SSH and Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_HOST_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            APP_DIR="/home/ec2-user/ci-cd-app"
+            if [ ! -d "$APP_DIR" ]; then
+              git clone https://github.com/salim1704/CI-CD.git "$APP_DIR"
+            else
+              cd "$APP_DIR"
+              git pull
+            fi
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
