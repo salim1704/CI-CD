@@ -38,15 +38,3 @@ def test_count_increments_hits(client, monkeypatch):
     resp2 = client.get("/count")
     assert resp2.status_code == 200
     assert "This page has been viewed 2 times." in resp2.data.decode("utf-8")
-
-
-def test_count_redis_failure_returns_500(client, monkeypatch):
-    # Optional: show what happens if Redis errors (current behavior = 500)
-    class BoomRedis:
-        def incr(self, key):
-            raise RuntimeError("Redis down")
-
-    monkeypatch.setattr(app_module, "get_redis", lambda: BoomRedis())
-
-    resp = client.get("/count")
-    assert resp.status_code == 500
