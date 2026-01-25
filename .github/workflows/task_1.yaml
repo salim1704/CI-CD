@@ -33,7 +33,7 @@ jobs:
           pytest test_app.py   
 
       - name: Docker build test
-        run: docker build -t test-image -f Dockerfile .
+        run: docker build -t test-image -f task_1/dockerfile .
     
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
